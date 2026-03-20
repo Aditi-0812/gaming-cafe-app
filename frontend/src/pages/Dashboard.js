@@ -1,71 +1,66 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+
+const API = "https://gaming-cafe-app-iofi.onrender.com";
 
 function Dashboard() {
   const [slots, setSlots] = useState([]);
 
+  useEffect(() => {
+    fetchSlots();
+  }, []);
+
   const fetchSlots = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/slots");
+      const res = await axios.get(`${API}/api/slots`);
       setSlots(res.data);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleBooking = async (slotId) => {
+  const bookSlot = async (slotId) => {
     try {
-      const token = localStorage.getItem("token");
-
       await axios.post(
-        "http://localhost:5000/api/bookings",
+        `${API}/api/bookings`,
         {
           slotId,
-          date: "2026-03-18"
+          date: new Date().toISOString().split("T")[0],
         },
         {
           headers: {
-            Authorization: token
-          }
+            Authorization: localStorage.getItem("token"),
+          },
         }
       );
 
-      alert("Booked 🎮");
+      alert("Booking successful 🎮");
       fetchSlots();
-
     } catch (err) {
-      alert("Booking Failed ❌");
+      alert(err.response?.data || "Booking failed");
     }
   };
 
-  useEffect(() => {
-    fetchSlots();
-  }, []);
-
   return (
-    <div style={{ padding: "20px" }}>
-      <h1 className="glow">🎮 Gaming Arena</h1>
-
-      <button className="button" onClick={() => window.location.href="/history"}>
-        My Bookings 📜
-      </button>
-
-      <button className="button" onClick={() => window.location.href="/leaderboard"}>
-        Leaderboard 🏆
-      </button>
+    <div style={{ padding: "20px", color: "white" }}>
+      <h2>Available Slots 🎮</h2>
 
       {slots.map((slot) => (
-        <div key={slot._id} className="card">
-          <h3>{slot.type}</h3>
-          <p>{slot.startTime} - {slot.endTime}</p>
-          <p>₹{slot.price}</p>
+        <div
+          key={slot._id}
+          style={{
+            border: "1px solid white",
+            margin: "10px",
+            padding: "10px",
+          }}
+        >
+          <h3>{slot.name}</h3>
+          <p>Price: ₹{slot.price}</p>
 
           {slot.isBooked ? (
-            <button className="button" disabled>
-              Booked ❌
-            </button>
+            <button disabled>Booked ❌</button>
           ) : (
-            <button className="button" onClick={() => handleBooking(slot._id)}>
+            <button onClick={() => bookSlot(slot._id)}>
               Book Slot 🎮
             </button>
           )}

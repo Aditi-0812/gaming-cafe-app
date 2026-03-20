@@ -1,5 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+
+const API = "https://gaming-cafe-app-iofi.onrender.com";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -7,52 +9,40 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post(`${API}/api/auth/login`, {
         email,
-        password
+        password,
       });
 
-      console.log(res.data);
-      window.location.href = "/dashboard";
-
       localStorage.setItem("token", res.data.token);
-
+      alert("Login successful ✅");
+      window.location.href = "/dashboard";
     } catch (err) {
-      alert("Login Failed ❌");
-      console.log(err);
+      alert("Login failed ❌");
     }
   };
 
-return (
-  <div style={{
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh"
-  }}>
-    <div className="card">
-      <h2 className="glow">Login 🎮</h2>
+  return (
+    <div style={{ padding: "20px", color: "white" }}>
+      <h2>Login 🎮</h2>
 
       <input
         type="email"
         placeholder="Email"
         onChange={(e) => setEmail(e.target.value)}
-        style={{ display: "block", margin: "10px 0", padding: "10px" }}
       />
+      <br /><br />
 
       <input
         type="password"
         placeholder="Password"
         onChange={(e) => setPassword(e.target.value)}
-        style={{ display: "block", margin: "10px 0", padding: "10px" }}
       />
+      <br /><br />
 
-      <button className="button" onClick={handleLogin}>
-        Login
-      </button>
+      <button onClick={handleLogin}>Login</button>
     </div>
-  </div>
-);
+  );
 }
 
 export default Login;

@@ -1,36 +1,30 @@
 body {
-  margin: 0;
-  background: #0a0a0a;
+  background-color: black;
   color: white;
   font-family: Arial, sans-serif;
 }
 
-/* glow text */
-.glow {
+h2 {
   color: #00ffff;
-  text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+  text-shadow: 0 0 10px #00ffff;
 }
 
-/* card */
-.card {
-  background: #111;
-  padding: 15px;
-  border-radius: 10px;
-  margin: 10px 0;
-  box-shadow: 0 0 10px #00ffff33;
-}
-
-/* button */
-.button {
-  padding: 10px;
-  background: transparent;
+button {
+  background-color: black;
+  color: #00ffff;
   border: 1px solid #00ffff;
-  color: #00ffff;
+  padding: 10px;
   cursor: pointer;
-  border-radius: 5px;
 }
 
-.button:hover {
-  background: #00ffff;
+button:hover {
+  background-color: #00ffff;
   color: black;
+}
+
+input {
+  background-color: black;
+  border: 1px solid white;
+  color: white;
+  padding: 5px;
 }

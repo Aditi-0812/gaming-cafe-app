@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import History from "./pages/History";
 import Leaderboard from "./pages/Leaderboard"; // ✅ IMPORTANT
+import "./App.css";
 
 function App() {
   return (
