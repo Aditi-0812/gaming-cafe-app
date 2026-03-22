@@ -45,4 +45,5 @@ router.get("/", auth, async (req, res) => {
     res.status(500).send("Error fetching bookings");
   }
 });
+const User = require("../models/User");
 module.exports = router;
