@@ -41,6 +41,9 @@ function Login() {
       <br /><br />
 
       <button onClick={handleLogin}>Login</button>
+      <button onClick={() => window.location.href = "/register"}>
+  New user? Register
+</button>
     </div>
   );
 }

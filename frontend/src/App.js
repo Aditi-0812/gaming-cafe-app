@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import History from "./pages/History";
 import Leaderboard from "./pages/Leaderboard"; // ✅ IMPORTANT
 import "./App.css";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/history" element={<History />} />
+       <Route path="/register" element={<Register />} />
         <Route path="/leaderboard" element={<Leaderboard />} /> {/* ✅ THIS WAS MISSING */}
       </Routes>
     </BrowserRouter>
